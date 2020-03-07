@@ -25,20 +25,13 @@ def f(N, x, MOD):
             ret += 2 * x
     return 4 * ret % MOD
 
+
 def solve(N, MOD):
     ret = 0
     for x in range(N + 10):
-        if x % 1000 == 0:
-            print(x)
         ret += f(N, x, MOD)
     return ret % MOD
 
 
-# %%
-MOD = 10**9 + 7
-solve(5, 10 ** 9 + 7), solve(12345, MOD)
-
-# %%
-solve(10**6, MOD)
 # %%
 print(solve(N, MOD))
