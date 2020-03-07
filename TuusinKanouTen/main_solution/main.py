@@ -1,4 +1,4 @@
-cd #!/usr/bin/env python3
+cd  # !/usr/bin/env python3
 # %%
 import sys
 read = sys.stdin.buffer.read
@@ -9,7 +9,7 @@ import numpy as np
 
 
 # %%
-N, MOD = map(int,read().split())
+N, MOD = map(int, read().split())
 
 
 # %%
