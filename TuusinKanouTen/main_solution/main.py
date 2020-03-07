@@ -1,5 +1,4 @@
-cd  # !/usr/bin/env python3
-# %%
+#!/usr/bin/python3.8
 import sys
 read = sys.stdin.buffer.read
 readline = sys.stdin.buffer.readline
@@ -7,12 +6,9 @@ readlines = sys.stdin.buffer.readlines
 from functools import lru_cache
 import numpy as np
 
-
-# %%
 N, MOD = map(int, read().split())
 
 
-# %%
 def prime_table(N):
     is_prime = np.zeros(N, np.bool)
     is_prime[2] = 1
@@ -36,7 +32,7 @@ def mobius_table(N, primes):
             mu[pp::pp] = 0
     return mu
 
-# %%
+
 @lru_cache(None)
 def F(N, MOD):
     """return sum(|x| + |y|) for lattice points (x,y), satisfying x^2 + y^2 <= N"""
@@ -54,5 +50,4 @@ def f(N, MOD):
     return (mu[:N + 1] * F_values * np.arange(N + 1, dtype=np.int64) % MOD).sum() % MOD
 
 
-# %%
 print(f(N, MOD))

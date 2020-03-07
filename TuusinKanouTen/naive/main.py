@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# %%
+#!/usr/bin/python3.8
 import sys
 read = sys.stdin.buffer.read
 readline = sys.stdin.buffer.readline
