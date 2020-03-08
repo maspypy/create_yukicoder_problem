@@ -11,9 +11,10 @@ from main_solution.main import solve
 MAX = 3 * 10 ** 5
 
 
-def write(ind, n, A):
+def write(ind, A):
     fname = f'03_randomYes_{ind:02}.in'
     with open(fname, 'w') as f:
+        n = len(A)
         f.write(f'{n}\n')
         A_str = ' '.join(map(str, A))
         f.write(f'{A_str}\n')
@@ -24,8 +25,8 @@ ind = 0
 for n in range(5, 20):
     while True:
         A = np.random.randint(1, MAX + 1, n)
-        if solve(n, A) is None:
+        if solve(A) is None:
             continue
         break
-    write(ind, n, A)
+    write(ind, A)
     ind += 1

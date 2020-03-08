@@ -6,7 +6,8 @@ readlines = sys.stdin.buffer.readlines
 import numpy as np
 
 
-def solve_small(N, A):
+def solve_small(A):
+    N = len(A)
     dp = np.zeros(1 << N, np.int32)
     for i, x in enumerate(A):
         dp[1 << i:1 << (i + 1)] = dp[:1 << i] + x
@@ -24,12 +25,13 @@ def solve_small(N, A):
     return B
 
 
-def solve(N, A):
+def solve(A):
+    N = len(A)
     K = 23
     if N <= K:
-        return solve_small(N, A)
+        return solve_small(A)
     else:
-        A[:K] = solve_small(K, A[:K])
+        A[:K] = solve_small(A[:K])
         A[K:] = 0
         return A
 
@@ -37,7 +39,7 @@ def solve(N, A):
 if __name__ == '__main__':
     N = int(readline())
     A = np.array(read().split(), np.int32)
-    A = solve(N, A)
+    A = solve(A)
     if A is None:
         print('No')
     else:

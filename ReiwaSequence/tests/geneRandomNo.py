@@ -10,7 +10,8 @@ from main_solution.main import solve
 MAX = 3 * 10 ** 5
 
 
-def write(ind, n, A):
+def write(ind, A):
+    n = len(A)
     fname = f'04_randomNo_{ind:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{n}\n')
@@ -23,8 +24,8 @@ ind = 0
 for n in range(1, 16):
     while True:
         A = np.random.randint(1, MAX + 1, n)
-        if solve(n, A) is not None:
+        if solve(A) is not None:
             continue
         break
-    write(ind, n, A)
+    write(ind, A)
     ind += 1

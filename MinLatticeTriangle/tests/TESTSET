@@ -5,14 +5,11 @@
 #cxx_generator(src='generator.cc', dependency=['testlib.h'])
 #java_generator(src='Generator.java', encoding='UTF-8', mainclass='Generator')
 #rust_generator(src='generator.rs')
-script_generator(src='geneVerySmall.py')
-script_generator(src='geneSmall.py')
-script_generator(src='geneLarge1000000007.py')
-script_generator(src='geneRandMod.py')
+#script_generator(src='generator.pl')
 
 ## Input validators.
 #c_validator(src='validator.c')
-cxx_validator(src='validator.cpp', dependency=['testlib.h'])
+#cxx_validator(src='validator.cc', dependency=['testlib.h'])
 #java_validator(src='Validator.java', encoding='UTF-8',
 #               mainclass='tmp/validator/Validator')
 #rust_validator(src='validator.rs')
@@ -41,7 +38,7 @@ cxx_validator(src='validator.cpp', dependency=['testlib.h'])
 #icpc_merger(input_terminator='0 0\n',
 #            output_replace=casenum_replace('Case 1', 'Case {0}'))
 #gcj_merger(output_replace=casenum_replace('Case 1', 'Case {0}'))
-id='D'
+id='E'
 #merged_testset(name=id + '_Merged', input_pattern='*.in')
 #subtask_testset(name='All', score=100, input_patterns=['*'])
 # precisely scored by judge program like Jiyukenkyu (KUPC 2013)

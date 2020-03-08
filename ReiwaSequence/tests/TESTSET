@@ -7,6 +7,7 @@
 #rust_generator(src='generator.rs')
 script_generator(src='geneRandomYes.py')
 script_generator(src='geneRandomNo.py')
+script_generator(src='geneWorstNo.py')
 
 ## Input validators.
 #c_validator(src='validator.c')

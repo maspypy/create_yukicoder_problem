@@ -5,8 +5,9 @@ readline = sys.stdin.buffer.readline
 readlines = sys.stdin.buffer.readlines
 from functools import lru_cache
 import numpy as np
+MOD = 10 ** 9 + 7
 
-N, MOD = map(int, read().split())
+N = int(read())
 
 
 def prime_table(N):
@@ -34,20 +35,22 @@ def mobius_table(N, primes):
 
 
 @lru_cache(None)
-def F(N, MOD):
+def F(N):
     """return sum(|x| + |y|) for lattice points (x,y), satisfying x^2 + y^2 <= N"""
     x_max = int(N ** .5)
     x = np.arange(1, x_max + 1, dtype=np.int64)
     y_max = np.sqrt(N - x * x).astype(int)
     S_xplus = (x * (1 + 2 * y_max) % MOD).sum() % MOD
-    return 4 * S_xplus % MOD
+    return S_xplus % MOD
 
 
-def f(N, MOD):
-    is_prime, primes = prime_table(N + 10)
-    mu = mobius_table(N + 10, primes)
-    F_values = np.array([0] + [F((N * N) // (n * n), MOD) for n in range(1, N + 1)], np.int64)
-    return (mu[:N + 1] * F_values * np.arange(N + 1, dtype=np.int64) % MOD).sum() % MOD
+def f(N):
+    Nsq = int(N ** .5)
+    is_prime, primes = prime_table(Nsq + 10)
+    mu = mobius_table(Nsq + 10, primes)
+    F_values = np.array([0] + [F(N // (n * n)) for n in range(1, Nsq + 1)], np.int64)
+    x = (mu[: Nsq + 1] * F_values * np.arange(Nsq + 1, dtype=np.int64) % MOD).sum() % MOD
+    return 48 * x - 16
 
 
-print(f(N, MOD))
+print(f(N))

@@ -4,6 +4,8 @@ using namespace std;
 typedef long long ll;
 
 #define MAX 1000010
+const int MOD = 1e9 + 7;
+
 bool is_prime[MAX];
 ll mu[MAX];
 
@@ -60,7 +62,7 @@ void mobius_table(vector<int> primes)
 }
 
 
-ll F(ll N, ll MOD){
+ll F(ll N){
     ll x_max = sqrt(N);
     ll S = 0;
     for (ll x = 1; x <= x_max; x++)
@@ -72,13 +74,13 @@ ll F(ll N, ll MOD){
     return 4 * S % MOD;
 }
 
-ll f(ll N, ll MOD)
+ll f(ll N)
 {
     ll ret = 0;
     for (ll d = 1; d <= N; d++)
     {
         ll n = (N * N) / (d * d);
-        ret += F(n, MOD) * mu[d] * d % MOD;
+        ret += F(n) * mu[d] * d % MOD;
     }
     ret %= MOD;
     if(ret < 0)
@@ -93,6 +95,6 @@ int main()
     cin >> N >> MOD;
     vector<int> primes = prime_table();
     mobius_table(primes);
-    cout << f(N, MOD) << endl;
+    cout << f(N) << endl;
     return 0;
 }

@@ -1,15 +1,15 @@
 # -*- coding: utf-8; mode: python -*-
 
-pid='D'
+pid='E'
 
 problem(
   time_limit=2.0,
   id=pid,
-  title=pid + ": Your Problem Name",
+  title=pid + ": 最小格子三角形",
   #wiki_name="Your pukiwiki page name", # for wikify plugin
   #assignees=['Assignees', 'for', 'this', 'problem'], # for wikify plugin
   #need_custom_judge=True, # for wikify plugin
-  reference_solution='main_solution',
+  #reference_solution='main_solution',
   )
 
 atcoder_config(
