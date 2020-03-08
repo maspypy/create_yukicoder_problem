@@ -1,6 +1,7 @@
+#!/usr/bin/python3.8
 import itertools
 import sys
-read = sys.stdin.buffer.read
+read = sys.stdin.buffer.read1
 
 
 def gen_points(N):

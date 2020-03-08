@@ -1,6 +1,6 @@
 #!/usr/bin/python3.8
 import sys
-read = sys.stdin.buffer.read
+read = sys.stdin.buffer.read1
 readline = sys.stdin.buffer.readline
 readlines = sys.stdin.buffer.readlines
 from functools import lru_cache
@@ -41,7 +41,7 @@ def F(N):
     x = np.arange(1, x_max + 1, dtype=np.int64)
     y_max = np.sqrt(N - x * x).astype(int)
     S_xplus = (x * (1 + 2 * y_max) % MOD).sum() % MOD
-    return S_xplus % MOD
+    return S_xplus
 
 
 def f(N):
@@ -50,7 +50,7 @@ def f(N):
     mu = mobius_table(Nsq + 10, primes)
     F_values = np.array([0] + [F(N // (n * n)) for n in range(1, Nsq + 1)], np.int64)
     x = (mu[: Nsq + 1] * F_values * np.arange(Nsq + 1, dtype=np.int64) % MOD).sum() % MOD
-    return 48 * x - 16
+    return (24 * x - 16) % MOD
 
 
 print(f(N))

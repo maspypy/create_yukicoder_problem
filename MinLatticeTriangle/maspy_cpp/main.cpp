@@ -61,8 +61,8 @@ void mobius_table(vector<int> primes)
     }
 }
 
-
-ll F(ll N){
+ll F(ll N)
+{
     ll x_max = sqrt(N);
     ll S = 0;
     for (ll x = 1; x <= x_max; x++)
@@ -71,7 +71,7 @@ ll F(ll N){
         S += x * (1 + 2 * y_max);
         S %= MOD;
     }
-    return 4 * S % MOD;
+    return S;
 }
 
 ll f(ll N)
@@ -79,11 +79,17 @@ ll f(ll N)
     ll ret = 0;
     for (ll d = 1; d <= N; d++)
     {
-        ll n = (N * N) / (d * d);
+        ll n = N / (d * d);
+        if(n == 0){
+            break;
+        }
         ret += F(n) * mu[d] * d % MOD;
     }
     ret %= MOD;
-    if(ret < 0)
+    ret *= 24;
+    ret -= 16;
+    ret %= MOD;
+    if (ret < 0)
         ret += MOD;
     return ret;
 }
@@ -91,8 +97,7 @@ ll f(ll N)
 int main()
 {
     ll N;
-    ll MOD;
-    cin >> N >> MOD;
+    cin >> N;
     vector<int> primes = prime_table();
     mobius_table(primes);
     cout << f(N) << endl;
