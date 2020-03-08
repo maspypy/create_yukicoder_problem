@@ -6,31 +6,23 @@ readlines = sys.stdin.buffer.readlines
 from numba import njit
 from math import gcd
 
-# %%
-N, MOD = map(int, read().split())
+MOD = 10**9 + 7
 
-# %%
+
 @njit
-def f(N, x, MOD):
+def solve(N):
     ret = 0
-    for y in range(N + 10):
-        if x * x + y * y > N * N:
-            break
-        if gcd(abs(x), abs(y)) != 1:
-            continue
-        if y == 0:
-            ret += x
-        else:
-            ret += 2 * x
-    return 4 * ret % MOD
+    M = 1
+    while (M + 1) ** 2 <= N:
+        M += 1
+    for x in range(-M, M + 1):
+        for y in range(-M, M + 1):
+            if x * x + y * y <= N:
+                if gcd(x, y) == 1:
+                    ret += abs(x) + abs(y)
+                    ret %= MOD
+    return (6 * ret - 16) % MOD
 
 
-def solve(N, MOD):
-    ret = 0
-    for x in range(N + 10):
-        ret += f(N, x, MOD)
-    return ret % MOD
-
-
-# %%
-print(solve(N, MOD))
+N = int(read())
+print(solve(N))
