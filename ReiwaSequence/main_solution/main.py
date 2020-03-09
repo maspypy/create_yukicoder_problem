@@ -15,9 +15,9 @@ def solve_small(A):
     if np.all(counts < 2):
         return None
     S = np.where(counts >= 2)[0][0]
-    I = np.where(dp == S)[0]
-    p = I[0]
-    q = I[1]
+    ind = np.where(dp == S)[0]
+    p = ind[0]
+    q = ind[1]
     B = A.copy()
     for i in range(N):
         c = ((p >> i) & 1) - ((q >> i) & 1)

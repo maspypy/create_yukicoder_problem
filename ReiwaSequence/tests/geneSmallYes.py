@@ -12,7 +12,7 @@ MAX = 3 * 10 ** 5
 
 def write(ind, A):
     n = len(A)
-    fname = f'03_randomNo_{ind:02}.in'
+    fname = f'01_smallYes_{ind:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{n}\n')
         A_str = ' '.join(map(str, A))
@@ -21,11 +21,15 @@ def write(ind, A):
 
 
 ind = 0
-for n in range(1, 16):
-    while True:
-        A = np.random.randint(1, MAX + 1, n)
-        if solve(A) is not None:
-            continue
-        break
-    write(ind, A)
-    ind += 1
+for n in range(2, 5):
+    for _ in range(3):
+        while True:
+            A = np.random.randint(1, 10**5 + 1, n - 1)
+            X = np.random.randint(-1, 2, n - 1)
+            x = np.dot(A, X)
+            if 0 < x <= MAX:
+                break
+        A = np.append(A, x)
+        assert solve(A) is not None
+        write(ind, A)
+        ind += 1

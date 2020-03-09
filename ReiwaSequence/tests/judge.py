@@ -19,7 +19,7 @@ def is_AC():
     difff = open(args.difffile)
     outf = open(args.difffile)
 
-    N = int(inf.readline())
+    _ = int(inf.readline())
     A = np.array(inf.readline().split(), np.int32)
 
     diff_ans = difff.readline().rstrip()
@@ -31,6 +31,8 @@ def is_AC():
             return False
         B = np.array(outf.readline().split(), np.int32)
         if B.sum() != 0:
+            return False
+        if np.all(B == 0):
             return False
         return np.all((B == A) | (B == 0) | (B == -A))
 
