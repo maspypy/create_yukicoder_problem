@@ -23,7 +23,7 @@ script_generator(src='geneWorstNo.py')
 #          variant=testlib_judge_runner)
 #java_judge(src='Judge.java', encoding='UTF-8', mainclass='Judge')
 #rust_judge(src='judge.rs')
-#script_judge(src='judge.py')
+script_judge(src='judge.py')
 
 ## Reactives.
 #c_reactive(src='reactive.c')
