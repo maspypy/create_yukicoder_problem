@@ -15,7 +15,7 @@ sizes = [100, 1000, 3 * 10**5]
 
 
 def write(ind, A):
-    fname = f'06_large_{ind:02}.in'
+    fname = f'07_large_{ind:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{len(A)}\n')
         A_str = ' '.join(map(str, A))
