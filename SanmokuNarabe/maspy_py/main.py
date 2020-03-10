@@ -15,11 +15,13 @@ def solve(S):
         o = T.count('o')
         assert o <= 2
         if o <= 1:
-            return False
+            continue
         if o == 2:
             assert T[0] == T[-1] == 'o'
             n = len(T)
-            return n % 2 == 1
+            if n % 2 == 1:
+                return True
+    return False
 
 
 if __name__ == '__main__':
