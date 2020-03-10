@@ -19,7 +19,7 @@ def gen_cases():
     yield '-' * N
     yield 'xo' + '-' * (N - 4) + 'ox'
     yield 'o' + '-' * (N - 4) + 'oxx'
-    yield 'xo' + '-' * (N - 3) + 'ox'
+    yield 'xo' + '-' * (N - 5) + 'ox'
     yield 'ox' * (N // 2)
 
 
