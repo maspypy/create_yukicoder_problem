@@ -8,14 +8,12 @@ from maspy_py.main import solve
 import random
 
 
-def write(ind, A):
-    n = len(A)
+def write(ind, S):
     fname = f'02_small_{ind:02}.in'
     with open(fname, 'w') as f:
-        f.write(f'{n}\n')
-        A_str = ' '.join(map(str, A))
-        f.write(f'{A_str}\n')
-    return
+        N = len(S)
+        f.write(str(N) + '\n')
+        f.write(S + '\n')
 
 
 def gen_YES():
