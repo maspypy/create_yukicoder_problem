@@ -11,7 +11,7 @@ MAX = 3 * 10 ** 5
 
 
 def write(ind, A):
-    fname = f'05_WorstNo_{ind:02}.in'
+    fname = f'05_WorstYes_{ind:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{len(A)}\n')
         A_str = ' '.join(map(str, A))

@@ -35,7 +35,7 @@ def gen_conway_NO():
 
 
 def write(ind, A):
-    fname = f'05_WorstNo_{ind:02}.in'
+    fname = f'04_WorstNo_{ind:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{len(A)}\n')
         A_str = ' '.join(map(str, A))
