@@ -12,7 +12,7 @@ MAX = 3 * 10 ** 5
 
 def write(ind, A):
     n = len(A)
-    fname = f'01_smallYes_{ind:02}.in'
+    fname = f'02_smallYes_{ind:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{n}\n')
         A_str = ' '.join(map(str, A))
