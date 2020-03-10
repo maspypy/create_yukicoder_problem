@@ -36,7 +36,7 @@ def modify(S):
 
 
 def write(ind, S):
-    fname = f'01_NO_{ind:02}.in'
+    fname = f'03_NO_{ind:02}.in'
     with open(fname, 'w') as f:
         N = len(S)
         f.write(str(N) + '\n')
