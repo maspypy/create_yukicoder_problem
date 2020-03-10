@@ -11,6 +11,6 @@ nums.append(10 ** 12 - 1)
 nums.append(999983**2)
 
 for i, N in enumerate(nums):
-    fname = f'04_hand_{i:02}.in'
+    fname = f'05_hand_{i:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{N}\n')

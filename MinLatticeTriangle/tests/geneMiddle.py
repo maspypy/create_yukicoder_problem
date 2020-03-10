@@ -4,6 +4,6 @@ import random
 
 for i in range(20):
     N = random.randint(10**4, 10**6)
-    fname = f'02_middle_{i:02}.in'
+    fname = f'03_middle_{i:02}.in'
     with open(fname, 'w') as f:
         f.write(f'{N}\n')
