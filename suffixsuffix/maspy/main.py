@@ -47,9 +47,8 @@ def prime_table(N):
 
 is_prime, primes = prime_table(10 ** 5 + 10)
 
+
 # repeated 対策
-
-
 def to_standard_form(S, N):
     for p in primes:
         if p > len(S):
