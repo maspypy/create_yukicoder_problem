@@ -1,45 +1,31 @@
 #!/usr/bin/python3.8
-import sys
-import pathlib
-import random
-me = pathlib.Path(__file__)
-prob_dir = str(me.parent.parent)
-sys.path.append(prob_dir)
-from topdown.main import solve
+import numpy as np
 
 
 MAX = 10**9
 
 
-def gen_NO():
+def gen_YES():
+    N = np.random.randint(9 * 10 ** 4, 10 ** 5 + 1)
     while True:
-        while True:
-            N = random.randint(9 * 10 ** 4, 10 ** 5)
-            A = [random.randint(1, 10 ** random.randint(3, 9)) for _ in range(N)]
-            if not solve(A, MAX, MAX, MAX):
+        X_use = np.random.randint(0, int(1.8 * MAX // N), N)
+        Y_use = np.random.randint(0, int(1.8 * MAX // N), N)
+        Z_use = np.random.randint(0, int(1.8 * MAX // N), N)
+        X = X_use.sum()
+        Y = Y_use.sum()
+        Z = Z_use.sum()
+        if X <= MAX and Y <= MAX and Z <= MAX:
+            A = 1000 * X_use + 5000 * Y_use + 10000 * Z_use
+            A -= np.random.randint(1, 1000, N)
+            if np.any(A <= 0):
                 continue
             break
-        dx = 1 << 29
-        nums = [0, 0, 0]
-        while True:
-            ind = [0, 1, 2]
-            random.shuffle(ind)
-            for i in ind:
-                nums[i] += dx
-                if solve(A, *nums):
-                    nums[i] -= dx
-                    continue
-            dx //= 2
-            if not dx:
-                break
-        if max(nums) > 10 ** 9:
-            continue
-        return A, *nums
+    return A, X, Y, Z
 
 
-def gen_YES():
-    A, X, Y, Z = gen_NO()
-    X += 1
+def gen_NO():
+    A, X, Y, Z = gen_YES()
+    A[0] += 1000
     return A, X, Y, Z
 
 

@@ -39,16 +39,14 @@ def gen_NO():
         if X == Y == Z == 0:
             continue
         break
-    r = random.randint(0, 2)
-    if r == 0:
-        if X > 0:
+    while True:
+        r = random.randint(0, 2)
+        if r == 0 and X > 0:
             return A, X - 1, Y, Z
-        else:
-            r = random.randint(1, 2)
-    if r == 1:
-        if Y > 0:
+        if r == 1 and Y > 0:
             return A, X, Y - 1, Z
-    return A, X, Y, Z - 1
+        if r == 2 and Z > 0:
+            return A, X, Y, Z - 1
 
 
 for i in range(20):
