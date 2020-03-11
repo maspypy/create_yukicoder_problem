@@ -14,7 +14,7 @@ def gen_YES():
     X, Y, Z = 0, 0, 0
     while True:
         if solve(A, X, Y, Z):
-            return A, X, Y, Z
+            break
         r = random.randint(0, 2)
         if r == 0:
             X += 1
@@ -22,27 +22,36 @@ def gen_YES():
             Y += 1
         else:
             Z += 1
+    while True:
+        if X and solve(A, X - 1, Y, Z):
+            X -= 1
+        elif Y and solve(A, X, Y - 1, Z):
+            Y -= 1
+        elif Z and solve(A, X, Y, Z - 1):
+            Z -= 1
+        else:
+            return A, X, Y, Z
 
 
 def gen_NO():
-    N = random.randint(1, 10)
-    A = [random.randint(1, 30000) for _ in range(N)]
-    X, Y, Z = 0, 0, 0
-    for _ in range(50):
-        r = random.randint(0, 2)
-        if r == 0:
-            if not solve(A, X + 1, Y, Z):
-                X += 1
-        elif r == 1:
-            if not solve(A, X, Y + 1, Z):
-                Y += 1
+    while True:
+        A, X, Y, Z = gen_YES()
+        if X == Y == Z == 0:
+            continue
+        break
+    r = random.randint(0, 2)
+    if r == 0:
+        if X > 0:
+            return A, X - 1, Y, Z
         else:
-            if not solve(A, X, Y, Z + 1):
-                Z += 1
-    return A, X, Y, Z
+            r = random.randint(1, 2)
+    if r == 1:
+        if Y > 0:
+            return A, X, Y - 1, Z
+    return A, X, Y, Z - 1
 
 
-for i in range(10):
+for i in range(20):
     fname = f'02_small_YES_{i:02}.in'
     A, X, Y, Z = gen_YES()
     N = len(A)
@@ -52,7 +61,7 @@ for i in range(10):
         f.write(A_str + '\n')
 
 
-for i in range(10):
+for i in range(20):
     fname = f'03_small_NO_{i:02}.in'
     A, X, Y, Z = gen_NO()
     N = len(A)
