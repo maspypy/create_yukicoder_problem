@@ -42,7 +42,7 @@ def gen_YES():
     return A, X, Y, Z
 
 
-for i in range(10):
+for i in range(15):
     fname = f'06_Biased_YES_{i:02}.in'
     A, X, Y, Z = gen_YES()
     N = len(A)
@@ -52,7 +52,7 @@ for i in range(10):
         f.write(A_str + '\n')
 
 
-for i in range(10):
+for i in range(15):
     fname = f'07_Biased_NO_{i:02}.in'
     A, X, Y, Z = gen_NO()
     N = len(A)
