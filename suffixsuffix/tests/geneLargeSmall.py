@@ -1,4 +1,4 @@
-#!/usr/bin/python3.8
+#!/usr/local/bin/python3.8
 import random
 
 alphabets = [chr(ord('a') + x) for x in range(26)]

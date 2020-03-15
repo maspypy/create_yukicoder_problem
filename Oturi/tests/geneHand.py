@@ -1,4 +1,4 @@
-#!/usr/bin/python3.8
+#!/usr/local/bin/python3.8
 def gen_cases():
     yield ([1000], 1, 0, 0)
     yield ([1000 * 100], 199, 0, 0)
