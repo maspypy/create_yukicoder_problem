@@ -119,15 +119,18 @@ def large(n_size):
 
 def unique_yes(n_size):
     for _ in range(n_size):
-        A = [1]
         while True:
-            x = sum(A) + np.random.randint(1, 4)
-            if x > MAX:
+            A = [1]
+            while True:
+                x = sum(A) + np.random.randint(1, 4)
+                if x > MAX:
+                    break
+                A.append(x)
+            A.pop()
+            A.append(sum(A))
+            A = np.array(A)
+            if len(A) == 18:
                 break
-            A.append(x)
-        A.pop()
-        A.append(sum(A))
-        A = np.array(A)
         np.random.shuffle(A)
         yield A
 
