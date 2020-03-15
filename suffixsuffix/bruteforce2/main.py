@@ -6,9 +6,9 @@ readlines = sys.stdin.readlines
 
 import numpy as np
 
+N, M, Q = map(int, readline().split())
 S = readline().rstrip()
-N, K = map(int, read().split())
-S *= N
+K = list(map(int, read().split()))
 
 
 def suffix_array(S):
@@ -33,5 +33,7 @@ def suffix_array(S):
     return ind, rank - 1
 
 
+S *= M
 SA, ISA = suffix_array(S)
-print(1 + SA[K - 1])
+answers = (1 + SA[i - 1] for i in K)
+print(' '.join(map(str, answers)))

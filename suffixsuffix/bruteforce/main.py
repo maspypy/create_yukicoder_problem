@@ -10,5 +10,5 @@ K = list(map(int, read().split()))
 
 S *= M
 SA = sorted(range(1, len(S) + 1), key=lambda i: S[i - 1:])
-answers = [SA[i - 1] for i in K]
+answers = (SA[i - 1] for i in K)
 print(' '.join(map(str, answers)))

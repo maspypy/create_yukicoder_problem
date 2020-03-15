@@ -3,11 +3,11 @@ import sys
 read = sys.stdin.read
 readline = sys.stdin.readline
 readlines = sys.stdin.readlines
-
 import numpy as np
 
+N, M, Q = map(int, readline().split())
 S = readline().rstrip()
-N, K = map(int, read().split())
+K = tuple(map(int, read().split()))
 
 
 def suffix_array(S):
@@ -49,7 +49,7 @@ is_prime, primes = prime_table(10 ** 5 + 10)
 
 
 # repeated 対策
-def to_standard_form(S, N):
+def to_standard_form(S, M):
     for p in primes:
         if p > len(S):
             break
@@ -66,38 +66,35 @@ def to_standard_form(S, N):
             if not repeated:
                 break
             S = S[:dx]
-            N *= p
-    return S, N
+            M *= p
+    return S, M
 
 
-S, N = to_standard_form(S, N)
-
-if N == 1:
+S, M = to_standard_form(S, M)
+if M == 1:
     SA, ISA = suffix_array(S)
-    print(1 + SA[K - 1])
+    K = np.array(K)
+    answers = 1 + SA[K - 1]
+    print(' '.join(answers.astype(str)))
     exit()
+
 
 SA, ISA = suffix_array(S * 2)
 # 長さを並べる
-SA = len(S) * 2 - SA
-LS = len(S)
-rest = K
-answer = 0
+N = len(S)
+SA = (N * 2 - SA)
+answer = [0] * Q
+i = 0
+ind = 1
 for x in SA.tolist():
-    if x <= LS:
-        if rest == 1:
-            answer = x
-            break
-        else:
-            rest -= 1
-            continue
-    if rest <= N - 1:
-        answer = x + (rest - 1) * LS
-        break
+    if x <= N:
+        n = 1
     else:
-        rest -= (N - 1)
-        continue
+        n = M - 1
+    while i < Q and K[i] < ind + n:
+        answer[i] = N * (M - K[i] + ind) + 1 - x
+        i += 1
+    ind += n
 
 # 長さを持ったので、インデックスに戻す
-answer = LS * N + 1 - answer
-print(answer)
+print(' '.join(map(str, answer)))
