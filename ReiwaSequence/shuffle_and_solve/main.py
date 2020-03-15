@@ -27,7 +27,7 @@ def solve_small(A):
 
 def solve(A):
     N = len(A)
-    K = 23
+    K = 22
     if N <= K:
         return solve_small(A)
     else:
