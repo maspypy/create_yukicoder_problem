@@ -4,9 +4,11 @@ read = sys.stdin.read
 readline = sys.stdin.readline
 readlines = sys.stdin.readlines
 
+N, M, Q = map(int, readline().split())
 S = readline().rstrip()
-N, K = map(int, read().split())
+K = list(map(int, read().split()))
 
-S *= N
+S *= M
 SA = sorted(range(1, len(S) + 1), key=lambda i: S[i - 1:])
-print(SA[K - 1])
+answers = [SA[i - 1] for i in K]
+print(' '.join(map(str, answers)))
