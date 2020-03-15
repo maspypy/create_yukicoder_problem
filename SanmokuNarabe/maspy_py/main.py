@@ -28,5 +28,4 @@ if __name__ == '__main__':
     T = int(readline())
     for _ in range(T):
         S = readline().rstrip().split()[1]
-        print(S)
         print('O' if solve(S) else 'X')
