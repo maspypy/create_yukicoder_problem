@@ -1,4 +1,4 @@
-#!/usr/bin/python3.8
+#!/usr/local/bin/python3.8
 import sys
 import pathlib
 me = pathlib.Path(__file__)
