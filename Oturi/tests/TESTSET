@@ -13,6 +13,7 @@ script_generator(src='geneBiased.py')
 ## Input validators.
 #c_validator(src='validator.c')
 cxx_validator(src='validator.cpp', dependency=['testlib.h'])
+cxx_validator(src='val_beet.cpp', dependency=['testlib.h'])
 #java_validator(src='Validator.java', encoding='UTF-8',
 #               mainclass='tmp/validator/Validator')
 #rust_validator(src='validator.rs')
