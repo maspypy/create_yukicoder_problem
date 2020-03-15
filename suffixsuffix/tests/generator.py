@@ -1,16 +1,18 @@
 #!/usr/local/bin/python3.8
 import random
 import numpy as np
-MAX_K = 10 ** 5
+MAX_Q = 10 ** 5
+MAX_N = 10 ** 5
+MAX_M = 10 ** 9
 
 alphabets = [chr(ord('a') + x) for x in range(26)]
 
 
 def make_K(N, M):
-    if N * M <= MAX_K:
+    if N * M <= MAX_Q:
         return np.arange(1, N * M + 1)
-    K = np.random.randint(1, N * M + 1, MAX_K * 3)
-    Q = np.random.randint(int(0.9 * MAX_K), MAX_K + 1)
+    K = np.random.randint(1, N * M + 1, MAX_Q * 3)
+    Q = np.random.randint(int(0.9 * MAX_Q), MAX_Q + 1)
     return np.unique(K)[:Q]
 
 
@@ -40,7 +42,6 @@ def make_random_word(N, x):
 
 
 def small_small(n_alphabets):
-    """n_alphabets: list of integers"""
     for n in n_alphabets:
         N = random.randint(5, 10)
         M = random.randint(2, 5)
@@ -48,5 +49,58 @@ def small_small(n_alphabets):
         yield (S, M)
 
 
-gens = [small_small([2, 3, 4, 26, 26])]
+def M_equal_1(n_alphabets):
+    for n in n_alphabets:
+        N = random.randint(int(MAX_N * .9), MAX_N)
+        M = 1
+        S = make_random_word(N, n)
+        yield (S, M)
+
+
+def large_small(n_alphabets):
+    for n in n_alphabets:
+        N = random.randint(int(MAX_N * .9), MAX_N)
+        M = random.randint(10**5, MAX_M)
+        S = make_random_word(N, n)
+        yield (S, M)
+
+
+def small_large(n_alphabets):
+    for n in n_alphabets:
+        N = random.randint(5, 10)
+        M = random.randint(10**5, MAX_M)
+        S = make_random_word(N, n)
+        yield (S, M)
+
+
+def large_large(n_alphabets):
+    for n in n_alphabets:
+        N = random.randint(int(MAX_N * .9), MAX_N)
+        M = random.randint(10**5, MAX_M)
+        S = make_random_word(N, n)
+        yield (S, M)
+
+
+def repeated(n_alphabets):
+    for n in n_alphabets:
+        rep = random.randint(2, 10**4)
+        size = (10**5) // rep
+        S = make_random_word(size, n) * rep
+        M = random.randint(10**5, MAX_M)
+        yield (S, M)
+
+
+def handmade():
+    # smallest
+    yield 'a', 1
+    yield 'a', MAX_M
+    # monotone max
+    yield 'a' * MAX_N, MAX_M
+    # random max
+    yield make_random_word(MAX_N, 26), MAX_M
+
+
+n_alphabets = [2, 3, 4, 26, 26]
+gens = [small_small(n_alphabets), M_equal_1(n_alphabets), large_small(n_alphabets),
+        small_large(n_alphabets), large_large(n_alphabets), repeated(n_alphabets), handmade()]
 write_all(gens)
