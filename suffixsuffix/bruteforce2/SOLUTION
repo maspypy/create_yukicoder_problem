@@ -15,7 +15,7 @@
 
 script_solution(src='main.py', challenge_cases=[]) # shebang line is required
 
-expected_verdicts([TLE, AC])
+expected_verdicts([TLE, AC, RE])
 
 #script_solution(src='main.rb') # shebang line is required
 #js_solution(src='main.js') # javascript (nodejs)
