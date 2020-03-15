@@ -46,7 +46,7 @@ def small_yes(n_cases):
 
 def random_yes(n_cases):
     for _ in range(n_cases):
-        n = np.random.randint(10, 30)
+        n = np.random.randint(10, 25)
         while True:
             A = np.random.randint(1, MAX + 1, n)
             if check(A):
