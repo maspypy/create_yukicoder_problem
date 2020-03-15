@@ -13,7 +13,7 @@
 #script_solution(src='main.sh') # shebang line is required
 #script_solution(src='main.pl') # shebang line is required
 
-script_solution(src='main.py') # shebang line is required
+script_solution(src='main.py', challenge_cases=[]) # shebang line is required
 
 expected_verdicts([TLE, AC])
 
