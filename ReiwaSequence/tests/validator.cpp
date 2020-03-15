@@ -3,9 +3,9 @@
 using namespace std;
 using Int = long long;
 const Int MIN_N = 1;
-const Int MAX_N = 300000;
+const Int MAX_N = 150000;
 const Int MIN_A = 1;
-const Int MAX_A = 300000;
+const Int MAX_A = 150000;
 
 signed main(int argc, char *argv[])
 {
