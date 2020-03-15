@@ -18,30 +18,30 @@ def solve_small(A):
     ind = np.where(dp == S)[0]
     p = ind[0]
     q = ind[1]
-    B = A.copy()
     for i in range(N):
         c = ((p >> i) & 1) - ((q >> i) & 1)
-        B[i] *= c
-    return B
+        A[i] *= c
+    return A
 
 
 def solve(A):
     N = len(A)
-    K = 23
+    K = 22
     if N <= K:
-        return solve_small(A)
+        return solve_small(A.copy())
     else:
-        A[:K] = solve_small(A[:K])
-        A[K:] = 0
-        return A
+        B = A.copy()
+        B[:K] = solve_small(A[:K].copy())
+        B[K:] = 0
+        return B
 
 
 if __name__ == '__main__':
     N = int(readline())
     A = np.array(read().split(), np.int32)
-    A = solve(A)
-    if A is None:
+    B = solve(A)
+    if B is None:
         print('No')
     else:
         print('Yes')
-        print(' '.join(map(str, A)))
+        print(' '.join(B.astype(str)))
