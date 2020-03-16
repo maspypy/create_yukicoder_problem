@@ -12,7 +12,9 @@
 #rust_solution(src='main.rs') # Rust (rustc)
 #script_solution(src='main.sh') # shebang line is required
 #script_solution(src='main.pl') # shebang line is required
-script_solution(src='main.py') # shebang line is required
+
+script_solution(src='main.py', challenge_cases=[]) # shebang line is required
+
 #script_solution(src='main.rb') # shebang line is required
 #js_solution(src='main.js') # javascript (nodejs)
 #hs_solution(src='main.hs') # haskell (stack + ghc)
