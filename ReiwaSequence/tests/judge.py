@@ -34,7 +34,7 @@ class WrongAnswer(Exception):
 
 def is_AC():
     _ = int(inf.readline())
-    A = np.array(inf.readline().split(), np.int32)
+    A = np.array(inf.readline().split(), np.int64)
 
     diff_ans = difff.readline().rstrip()
     if diff_ans == 'No':
@@ -43,7 +43,7 @@ def is_AC():
         out_ans = outf.readline().rstrip()
         if out_ans != 'Yes':
             return False
-        B = np.array(outf.readline().split(), np.int32)
+        B = np.array(outf.readline().split(), np.int64)
         if B.sum() != 0:
             return False
         if np.all(B == 0):
