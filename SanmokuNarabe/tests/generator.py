@@ -160,7 +160,7 @@ def large_yes_board(param):
 
 
 def handmade():
-    n = random.randint(0, 5)
+    n = random.randint(0, 4)
     if n == 0:
         return '-' * MAX_S
     if n == 1:
