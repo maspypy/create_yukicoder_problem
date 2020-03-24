@@ -5,8 +5,6 @@ template<typename T1,typename T2> inline void chmax(T1 &a,T2 b){if(a<b) a=b;}
 using Int = long long;
 const char newl = '\n';
 
-
-
 // longest common prefix of s and s[i:n]
 template<typename T>
 vector<int> zalgorithm(vector<T> vs){
@@ -31,7 +29,6 @@ vector<int> zalgorithm(vector<T> vs){
 vector<int> zalgorithm(string s){
   return zalgorithm(vector<char>(s.begin(),s.end()));
 }
-
 
 struct SuffixArray{
   string s;
@@ -109,52 +106,70 @@ signed main(){
   cin.tie(0);
   ios::sync_with_stdio(0);
 
+  using ll = long long;
+  ll n,m,q;
+  cin>>n>>m>>q;
+
   string s;
   cin>>s;
 
-  using ll = long long;
-  ll n,k;
-  cin>>n>>k;
+  vector<ll> ks(q);
+  for(int i=0;i<q;i++) cin>>ks[i];
 
   auto zs=zalgorithm(s+s);
-  for(int i=1;i<=(int)s.size();i++){
-    if(s.size()%i) continue;
-    if(zs[i]>=(int)s.size()){
-      n*=s.size()/i;
+  for(int i=1;i<=n;i++){
+    if(n%i) continue;
+    if(zs[i]>=n){
+      m*=n/i;
       s=s.substr(0,i);
       break;
     }
   }
+  n=s.size();
 
-  if(s.size()==1){
-    cout<<n-k+1<<endl;
+  if(n==1){
+    for(int i=0;i<q;i++){
+      if(i) cout<<" ";
+      cout<<m-ks[i]+1;
+    }
+    cout<<endl;
     return 0;
   }
 
-  if(n==1){
+  if(m==1){
     SuffixArray sa(s);
-    int v=sa.sa[1+(k-1)/n];
-    cout<<1+v<<endl;
+    for(int i=0;i<q;i++){
+      if(i) cout<<" ";
+      cout<<1+sa.sa[ks[i]];
+    }
+    cout<<endl;
     return 0;
   }
 
   SuffixArray sa(s+s);
-  for(int i=1;i<=(int)s.size()*2;i++){
-    if(sa.sa[i]>=(int)s.size()){
-      k--;
-      if(k==0){
-        cout<<(int)s.size()*(n-2)+1+sa.sa[i]<<endl;
-        break;
+  vector<ll> ans(q,-1);
+
+  ll tmp=0;
+  for(int i=1,j=0;i<=n*2;i++){
+    if(sa.sa[i]>=n){
+      tmp++;
+      if(j<q and ks[j]==tmp){
+        ans[j]=n*(m-2)+1+sa.sa[i];
+        j++;
       }
     }else{
-      k-=n-1;
-      if(k<=0){
-        ll ans=1+sa.sa[i];
-        ans-=k*(int)s.size();
-        cout<<ans<<endl;
-        break;
+      tmp+=m-1;
+      while(j<q and ks[j]<=tmp){
+        ans[j]=1+sa.sa[i]-(ks[j]-tmp)*n;
+        j++;
       }
     }
   }
+
+  for(int i=0;i<q;i++){
+    if(i) cout<<" ";
+    cout<<ans[i];
+  }
+  cout<<endl;
   return 0;
 }
