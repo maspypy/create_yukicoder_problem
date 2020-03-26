@@ -161,16 +161,17 @@ def large_yes_board(param):
 
 def handmade():
     n = random.randint(0, 4)
+    N = random.randint(MAX_S - 9, MAX_S)
     if n == 0:
-        return '-' * MAX_S
+        return '-' * N
     if n == 1:
-        return 'ox' * (MAX_S // 2)
+        return 'ox' * (N // 2)
     if n == 2:
-        return 'o' * (MAX_S // 2) + 'x' * (MAX_S // 2)
+        return 'o' * (N // 2) + 'x' * (N // 2)
     if n == 3:
-        return 'xo' + '-' * (MAX_S - 4) + 'ox'
+        return 'xo' + '-' * (N - 4) + 'ox'
     if n == 4:
-        return 'xo' + '-' * (MAX_S - 5) + 'ox'
+        return 'xo' + '-' * (N - 5) + 'ox'
 
 
 def gen_dataset(funcs, T):
