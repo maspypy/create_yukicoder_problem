@@ -6,7 +6,7 @@ readlines = sys.stdin.buffer.readlines
 from numba import njit
 from math import gcd
 
-MOD = 10**9 + 7
+MOD = 998244353
 
 
 @njit

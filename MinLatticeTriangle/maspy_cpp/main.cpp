@@ -4,7 +4,7 @@ using namespace std;
 typedef long long ll;
 
 #define MAX 1000010
-const int MOD = 1e9 + 7;
+const int MOD = 998244353;
 
 bool is_prime[MAX];
 ll mu[MAX];
@@ -80,7 +80,8 @@ ll f(ll N)
     for (ll d = 1; d <= N; d++)
     {
         ll n = N / (d * d);
-        if(n == 0){
+        if (n == 0)
+        {
             break;
         }
         ret += F(n) * mu[d] * d % MOD;

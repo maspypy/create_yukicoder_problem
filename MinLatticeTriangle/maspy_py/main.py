@@ -4,7 +4,7 @@ read = sys.stdin.buffer.read1
 readline = sys.stdin.buffer.readline
 readlines = sys.stdin.buffer.readlines
 import numpy as np
-MOD = 10 ** 9 + 7
+MOD = 998244353
 
 N = int(read())
 
