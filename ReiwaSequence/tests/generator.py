@@ -110,7 +110,7 @@ def conway_yes():
         A = np.concatenate([conway, [get_random_number(mod, j << i) for i in range(n)]]).astype(np.int32)
         np.random.shuffle(A)
         yield A
-    for x in [1, MAX]:
+    for x in [1, MAX - 1]:
         conway = get_conway(19)
         A = np.concatenate([conway, [x, x]])
         yield A
