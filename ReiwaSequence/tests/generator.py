@@ -111,8 +111,8 @@ def conway_yes():
         np.random.shuffle(A)
         yield A
     for x in [1, MAX - 1]:
-        conway = get_conway(19)
-        A = np.concatenate([conway, [x, x]])
+        conway = get_conway(17)
+        A = np.concatenate([4 * conway, [x, x]])
         yield A
         yield A[::-1]
         np.random.shuffle(A)
