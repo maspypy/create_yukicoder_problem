@@ -29,6 +29,11 @@ def write_all(gens):
             write_case(category_name, j, N)
 
 
+def get_conway(L):
+    A = np.array([0, 1, 2, 4, 7, 13, 24, 44, 84, 161, 309, 594, 1164, 2284, 4484, 8807, 17305, 34301, 68008, 134852, 267420], np.int32)
+    return A[L] - A[:L][::-1]
+
+
 def small_yes(n_cases):
     for _ in range(n_cases):
         size = np.random.randint(1, 4)
@@ -64,49 +69,58 @@ def random_no(n_cases):
         yield A
 
 
-def powerof2_no():
-    K = 18
-    A = np.empty(K, np.int32)
-    for i in range(K):
-        x = 1 << i
-        n = np.random.randint(0, (MAX - x) // (x + x) + 1)
-        A[i] = x * (n + n + 1)
-    np.random.shuffle(A)
-    return A
-
-
 def conway_no():
-    conway = np.array([
-        66844, 100551, 117547, 126045, 130368,
-        132568, 133688, 134258, 134543, 134691,
-        134768, 134808, 134828, 134839, 134845,
-        134848, 134850, 134851, 134852], np.int32)
-    while True:
-        n = np.random.randint(0, MAX - conway[-1] + 1)
-        A = conway + n
-        if not check(A):
-            np.random.shuffle(A)
-            return A
+    for N in range(12, 20):
+        conway = get_conway(N)
+        conway <<= (19 - N)
+        assert conway.max() <= MAX
 
+        def get_random_number(e):
+            """ 2でちょうど e 回われる"""
+            M = MAX >> e
+            while True:
+                x = np.random.randint(1, M + 1)
+                if x & 1:
+                    break
+            x <<= e
+            assert x <= MAX
+            return x
 
-def worst_no(n_size):
-    funs = [conway_no, powerof2_no]
-    for i in range(n_size):
-        f = funs[i & 1]
-        yield f()
-
-
-def worst_yes(n_size):
-    for A in worst_no(n_size):
-        x = np.random.randint(1, MAX + 1)
-        A = np.append(A, x)
-        if np.random.randint(0, 2):
-            A = A[::-1]
+        A = np.concatenate([conway, [get_random_number(i) for i in range(19 - N)]]).astype(np.int32)
+        np.random.shuffle(A)
         yield A
 
 
-def large(n_size):
-    for A in worst_no(n_size):
+def conway_yes():
+    for N in range(12, 19):
+        conway = get_conway(N)
+        assert conway.max() <= MAX
+
+        def get_random_number(mod, r):
+            r %= mod
+            M = (MAX - r) // mod
+            return np.random.randint(0, M + 1) * mod + r
+        n = 19 - N
+        mod = (1 << n) - 1
+        conway *= mod
+        while True:
+            j = np.random.randint(0, mod)
+            if np.gcd(mod, j) == 1:
+                break
+        A = np.concatenate([conway, [get_random_number(mod, j << i) for i in range(n)]]).astype(np.int32)
+        np.random.shuffle(A)
+        yield A
+    for x in [1, MAX]:
+        conway = get_conway(19)
+        A = np.concatenate([conway, [x, x]])
+        yield A
+        yield A[::-1]
+        np.random.shuffle(A)
+        yield A
+
+
+def large():
+    for A in conway_no():
         N = np.random.randint(int(MAX * .9), MAX)
         B = np.random.randint(1, MAX + 1, N)
         B = np.unique(B)
@@ -117,24 +131,6 @@ def large(n_size):
         yield B
 
 
-def unique_yes(n_size):
-    for _ in range(n_size):
-        while True:
-            A = [1]
-            while True:
-                x = sum(A) + np.random.randint(1, 4)
-                if x > MAX:
-                    break
-                A.append(x)
-            A.pop()
-            A.append(sum(A))
-            A = np.array(A)
-            if len(A) == 18:
-                break
-        np.random.shuffle(A)
-        yield A
-
-
 def handmade():
     # max
     yield np.random.randint(1, MAX + 1, MAX)
@@ -142,7 +138,18 @@ def handmade():
     yield np.arange(1, MAX + 1)
     # x,x,...,x
     yield np.ones(MAX, np.int32) * np.random.randint(1, MAX + 1)
+    # x
+    yield np.random.randint(1, MAX + 1, 1)
+    # 大きな和になるやつ
+    while True:
+        A = get_conway(12)
+        A *= 127
+        A = np.concatenate([A, [149987 - (1 << i) - 127 * np.random.randint(0, 50) for i in range(7)]])
+        if check(A):
+            break
+    yield A
+    yield A[::-1]
 
 
-gens = [small_yes(5), random_yes(5), random_no(5), worst_no(10), large(10), unique_yes(10), handmade()]
+gens = [small_yes(5), random_yes(5), random_no(5), conway_no(), conway_yes(), large(), handmade()]
 write_all(gens)
