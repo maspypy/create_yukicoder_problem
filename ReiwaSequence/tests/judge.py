@@ -44,6 +44,8 @@ def is_AC():
         if out_ans != 'Yes':
             return False
         B = np.array(outf.readline().split(), np.int64)
+        if len(A) != len(B):
+            return False
         if B.sum() != 0:
             return False
         if np.all(B == 0):
