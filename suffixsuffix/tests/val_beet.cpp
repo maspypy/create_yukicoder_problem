@@ -27,7 +27,6 @@ void input() {
   string S = inf.readString();
   for (char c : S)
     ensure(islower(c));
-  inf.readEoln();
 
   ll last = 0;
   for (int i = 0; i < Q; i++) {

@@ -148,7 +148,7 @@ signed main()
       dp[j].emplace_back(i);
   }
 
-  using M = Mint<int>;
+  using M = Mint<int, 998244353>;
   M ans{0};
 
   for (ll i = 1; i * i <= n; i++)
