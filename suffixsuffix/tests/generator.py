@@ -60,7 +60,7 @@ def M_equal_1(n_alphabets):
 def large_small(n_alphabets):
     for n in n_alphabets:
         N = random.randint(int(MAX_N * .9), MAX_N)
-        M = random.randint(10**5, MAX_M)
+        M = random.randint(2, 6)
         S = make_random_word(N, n)
         yield (S, M)
 
